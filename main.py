@@ -1,6 +1,68 @@
+def is_divisible_by(number: int, divisor: int) -> bool:
+    """
+    Tests if a number is divisible by another.
+    :param number: The number we want tested.
+    :param divisor: The potential divisor.
+    :return: True, if the number is divisible by the divisor. False, otherwise.
+    """
+    return number % divisor == 0
+
+
+def has_all_digits_prime(number: int) -> bool:
+    """
+    Tests whether the given integer's digits are all primes.
+    :param number: The given number.
+    :return: True, if all the number's digits are primes. False, otherwise.
+    """
+
+    # instead of writing a primality checker, we'll just use a list of the only existing prime digits
+    prime_digits = [2, 3, 5, 7]
+
+    if number == 0:
+        return False
+
+    # transform the number into its absolute value, if negative
+    if number < 0:
+        number = -number
+
+    # At each step, check the primality of the number's last digit.
+    while number > 0:
+        last_digit = number % 10
+        if last_digit in prime_digits:
+            # last digit is prime, so strip it from the number and continue
+            number = number // 10
+        else:
+            # last digit is not prime, so we can stop
+            return False
+
+    return True
+
+
+def test_is_divisible_by():
+    """
+    Tests the is_divisible_by(int, int) function.
+    """
+    assert not is_divisible_by(101, 17)
+    assert not is_divisible_by(5, 2)
+    assert is_divisible_by(4, 2)
+    assert is_divisible_by(1992, 3)
+    assert is_divisible_by(0, 1000)
+
+
+def test_has_all_digits_prime():
+    """
+    Tests the has_all_digits_prime(int) function.
+    """
+    assert not has_all_digits_prime(576)
+    assert not has_all_digits_prime(100)
+    assert has_all_digits_prime(777)
+    assert has_all_digits_prime(235)
+
+
 def run_tests():
     """ Runs all unit tests and prints a message if they are successful. """
-    pass
+    test_is_divisible_by()
+    test_has_all_digits_prime()
     print("\n[TEST] All tests passed, yay!\n")
 
 
