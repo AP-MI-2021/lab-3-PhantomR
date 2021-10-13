@@ -174,6 +174,17 @@ def ui_process_display_list(lst: list[int]):
     print(lst)
 
 
+def ui_process_find_longest_subsequence_with_elements_divisible_by(lst: list[int]):
+    divisor = int(input("Input the common divisor: "))
+    longest_subsequence = find_longest_subsequence_satisfying_condition(lst, lambda x: is_divisible_by(x, divisor))
+    ui_process_display_list(longest_subsequence)
+
+
+def ui_process_find_longest_subsequence_with_elements_having_all_prime_digits(lst: list[int]):
+    longest_subsequence = find_longest_subsequence_satisfying_condition(lst, has_all_digits_prime)
+    ui_process_display_list(longest_subsequence)
+
+
 def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
     """
     Receives a command number and processes it, eventually using the list lst.
@@ -203,6 +214,10 @@ def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
         lst = ui_process_read_list()
     elif command == 2:
         ui_process_display_list(lst)
+    elif command == 3:
+        ui_process_find_longest_subsequence_with_elements_divisible_by(lst)
+    elif command == 4:
+        ui_process_find_longest_subsequence_with_elements_having_all_prime_digits(lst)
     else:
         print("Invalid command. Please try again.")
 
@@ -226,6 +241,8 @@ def ui_show_menu():
     print("--------------------")
     print("1. Read list")
     print("2. Display list")
+    print("3. Find the longest subsequence whose elements are all divisible by a given integer")
+    print("4. Find the longest subsequence whose elements have all prime digits")
     print("--------------------")
     print("0. EXIT")
 
