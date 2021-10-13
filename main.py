@@ -168,27 +168,54 @@ def ui_process_display_list(lst: list[int]):
 
     Parameters
     ----------
-    lst : list
+    lst : list[int]
         The list to display.
     """
     print(lst)
 
 
 def ui_process_find_longest_subsequence_with_elements_divisible_by(lst: list[int]):
+    """
+    Reads an integer from Standard Input, then finds the longest subsequence with elements divisible by this integer,
+    and finally prints it to Standard Output.
+
+    Parameters
+    ----------
+    lst : list[int]
+        The list in which to find the longest subsequence.
+    """
     divisor = int(input("Input the common divisor: "))
     longest_subsequence = find_longest_subsequence_satisfying_condition(lst, lambda x: is_divisible_by(x, divisor))
     ui_process_display_list(longest_subsequence)
 
 
 def ui_process_find_longest_subsequence_with_elements_having_all_prime_digits(lst: list[int]):
+    """
+    Reads an integer from Standard Input, then finds the longest subsequence with elements having all prime digits,
+    and finally prints it to Standard Output.
+
+    Parameters
+    ----------
+    lst : list[int]
+        The list in which to find the longest subsequence.
+    """
     longest_subsequence = find_longest_subsequence_satisfying_condition(lst, has_all_digits_prime)
     ui_process_display_list(longest_subsequence)
 
 
 def ui_process_find_longest_subsequence_with_even_elements(lst):
+    """
+    Reads an integer from Standard Input, then finds the longest subsequence with even elements,
+    and finally prints it to Standard Output.
+
+    Parameters
+    ----------
+    lst : list[int]
+        The list in which to find the longest subsequence.
+    """
     longest_subsequence = find_longest_subsequence_satisfying_condition(lst, lambda x: is_divisible_by(x, 2))
     ui_process_display_list(longest_subsequence)
-    
+
 
 def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
     """
@@ -200,12 +227,12 @@ def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
     ----------
     command : int
         The command to process, specified by a number.
-    lst : list
+    lst : list[int]
         The list used by some of the commands.
 
     Returns
     -------
-    list:
+    list[int]:
         The (possible modified) list.
     bool:
         True, if the command is an EXIT command; False, otherwise.
