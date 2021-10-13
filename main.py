@@ -41,8 +41,7 @@ def ui_process_display_list(lst: list[int]):
     lst : list
         The list to display.
     """
-    for list_element in lst:
-        print(list_element, end=" ")
+    print(lst)
 
 
 def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
