@@ -1,9 +1,12 @@
 def is_divisible_by(number: int, divisor: int) -> bool:
     """
     Tests if a number is divisible by another.
-    :param number: The number we want tested.
-    :param divisor: The potential divisor.
-    :return: True, if the number is divisible by the divisor. False, otherwise.
+    :param number: int
+        The number we want tested.
+    :param divisor: int
+        The potential divisor.
+    :return: bool
+        True, if the number is divisible by the divisor. False, otherwise.
     """
     return number % divisor == 0
 
@@ -11,8 +14,10 @@ def is_divisible_by(number: int, divisor: int) -> bool:
 def has_all_digits_prime(number: int) -> bool:
     """
     Tests whether the given integer's digits are all primes.
-    :param number: The given number.
-    :return: True, if all the number's digits are primes. False, otherwise.
+    :param number: int
+        The given number.
+    :return: bool
+        True, if all the number's digits are primes. False, otherwise.
     """
 
     # instead of writing a primality checker, we'll just use a list of the only existing prime digits
