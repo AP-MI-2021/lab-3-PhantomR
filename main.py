@@ -1,3 +1,6 @@
+from copy import copy
+
+
 def is_divisible_by(number: int, divisor: int) -> bool:
     """
     Tests if a number is divisible by another.
@@ -41,6 +44,46 @@ def has_all_digits_prime(number: int) -> bool:
             return False
 
     return True
+
+
+def find_longest_subsequence_satisfying_condition(
+        lst: list[int], condition_function: callable[[int], int]) -> list[int]:
+    """
+    Finds the longest subsequence in a given list of integers such that each of its elements yield True when
+    passed through a given condition function.
+
+    :param lst: list
+        The list in which we want to find the longest subsequence.
+    :param condition_function: function(int) -> bool
+        An int to bool function, representing a test that each member of the subsequence must pass.
+    :return: list
+        A list containing the longest subsequence satisfying the given condition.
+    """
+
+    lst_length = len(lst)
+    previous_maximal_subsequence_length = 0
+    previous_maximal_subsequence = []
+    current_subsequence = []
+
+    for i in range(lst_length):
+        if condition_function(lst[i]):
+            # current list element satisfies the condition, so add it to temporary subsequence
+            current_subsequence.append(lst[i])
+        else:
+            # current element fails the condition, so we have to end our temporary subsequence
+            # and compare its length to the previous maximum length
+            current_subsequence_length = len(current_subsequence)
+            if current_subsequence_length > previous_maximal_subsequence_length:
+                previous_maximal_subsequence_length = current_subsequence_length
+                previous_maximal_subsequence = copy(current_subsequence)
+                current_subsequence = []
+
+    # we have to compare the current subsequence to the previous maximal one in case
+    # the last element tested in the loop above satisfied the condition function
+    if len(current_subsequence) > previous_maximal_subsequence_length:
+        previous_maximal_subsequence = current_subsequence
+
+    return previous_maximal_subsequence
 
 
 def test_is_divisible_by():
