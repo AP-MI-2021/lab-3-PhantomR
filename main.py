@@ -185,6 +185,11 @@ def ui_process_find_longest_subsequence_with_elements_having_all_prime_digits(ls
     ui_process_display_list(longest_subsequence)
 
 
+def ui_process_find_longest_subsequence_with_even_elements(lst):
+    longest_subsequence = find_longest_subsequence_satisfying_condition(lst, lambda x: is_divisible_by(x, 2))
+    ui_process_display_list(longest_subsequence)
+    
+
 def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
     """
     Receives a command number and processes it, eventually using the list lst.
@@ -218,6 +223,8 @@ def ui_process_command(command: int, lst: list[int]) -> (list[int], bool):
         ui_process_find_longest_subsequence_with_elements_divisible_by(lst)
     elif command == 4:
         ui_process_find_longest_subsequence_with_elements_having_all_prime_digits(lst)
+    elif command == 5:
+        ui_process_find_longest_subsequence_with_even_elements(lst)
     else:
         print("Invalid command. Please try again.")
 
