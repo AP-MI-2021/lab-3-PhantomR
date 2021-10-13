@@ -1,4 +1,5 @@
 from copy import copy
+from typing import Callable
 
 
 def is_divisible_by(number: int, divisor: int) -> bool:
@@ -47,7 +48,7 @@ def has_all_digits_prime(number: int) -> bool:
 
 
 def find_longest_subsequence_satisfying_condition(
-        lst: list[int], condition_function: callable[[int], int]) -> list[int]:
+        lst: list[int], condition_function: Callable[[int], bool]) -> list[int]:
     """
     Finds the longest subsequence in a given list of integers such that each of its elements yield True when
     passed through a given condition function.
@@ -76,7 +77,8 @@ def find_longest_subsequence_satisfying_condition(
             if current_subsequence_length > previous_maximal_subsequence_length:
                 previous_maximal_subsequence_length = current_subsequence_length
                 previous_maximal_subsequence = copy(current_subsequence)
-                current_subsequence = []
+
+            current_subsequence = []
 
     # we have to compare the current subsequence to the previous maximal one in case
     # the last element tested in the loop above satisfied the condition function
@@ -84,6 +86,23 @@ def find_longest_subsequence_satisfying_condition(
         previous_maximal_subsequence = current_subsequence
 
     return previous_maximal_subsequence
+
+
+def test_find_longest_subsequence_satisfying_condition():
+    """
+    Tests the find_longest_subsequence_satisfying_condition(list[int], Callable[[int], bool]) function.
+    """
+    assert find_longest_subsequence_satisfying_condition(
+        [10, 20, 5, 6, 7, 10, 20, 30, 1, 2, 3, 30], lambda x: is_divisible_by(x, 10)) == \
+        [10, 20, 30]
+
+    assert find_longest_subsequence_satisfying_condition(
+        [10, 20, 5, 6, 7, 10, 20, 30, 1, 2, 3, 30], lambda x: not is_divisible_by(x, 2)) == \
+        [5]
+
+    assert find_longest_subsequence_satisfying_condition(
+        [10, 20, 5, 75, 10, 20, 333, 5, 77, 30, 1, 2, 3, 30, 3, 5, 7, 3, 573], has_all_digits_prime) == \
+        [3, 5, 7, 3, 573]
 
 
 def test_is_divisible_by():
@@ -111,6 +130,7 @@ def run_tests():
     """ Runs all unit tests and prints a message if they are successful. """
     test_is_divisible_by()
     test_has_all_digits_prime()
+    test_find_longest_subsequence_satisfying_condition()
     print("\n[TEST] All tests passed, yay!\n")
 
 
